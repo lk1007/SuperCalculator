@@ -1,5 +1,6 @@
 #include <iostream>
+#include "func.h"
 int main(){
-    std::cout << "Liam\n";
+    std::cout << "Hello World\n";
     return 0;
 }
