@@ -3,14 +3,15 @@
 #ifndef FUNC_H
 class Calculator{
     public:
-        int add(int a, int b);
-        int sub(int a, int b);
-        int mult(int a, int b);
-        int div(int a, int b);
         void showHistory();
         void operation();
         Calculator();
     private:
-        std::vector<int> history;
+        std::vector<float> history;
+        float parse(std::string& expr);
+        float add(float a, float b);
+        float sub(float a, float b);
+        float mult(float a, float b);
+        float div(float a, float b);
     };
 #endif

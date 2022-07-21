@@ -1,29 +1,46 @@
+#include <algorithm>
 #include <string>
 #include "func.h"
 using namespace std;
-int Calculator::add(int a, int b){
-    int result = a+b;
+float Calculator::add(float a, float b){
+    float result = a+b;
     history.push_back(result);
     return result;
 }
-int Calculator::sub(int a, int b){
-    int result = a+b;
+float Calculator::sub(float a, float b){
+    float result = a+b;
     history.push_back(result);
     return result;
 }
-int Calculator::mult(int a, int b){
-    int result = a+b;
+float Calculator::mult(float a, float b){
+    float result = a+b;
     history.push_back(result);
     return result;
 }
-int Calculator::div(int a, int b){
-    int result = a+b;
+float Calculator::div(float a, float b){
+    float result = a+b;
     history.push_back(result);
     return result;
+}
+float Calculator::parse(string& expr){
+    int i = 0;
+    while(expr.at(i) >= '0' && expr.at(i) <= '9')
+        i++;
+    float num1 = stof(expr.substr(0,i));
+    int op = expr.at(i);
+    float num2 = stof(expr.substr(i,expr.size()));
+    switch (op){
+        case '+':
+            return add(num1,num2);
+
+    }
+    return num1;
 }
 void Calculator::operation(){
-   string expr = "Liam";
-   cout << expr << endl;
+   string expr = "3 + 3";
+   expr.erase(remove(expr.begin(),expr.end(), ' '), expr.end());
+   float result = parse(expr);
+   cout << result << endl;
 }
 void Calculator::showHistory(){
     std::cout << "history: \n";
