@@ -37,7 +37,9 @@ float Calculator::parse(string& expr){
     return num1;
 }
 void Calculator::operation(){
-   string expr = "3 + 3";
+   string expr;
+   cout << "Input your expression to calculate: ";
+   getline (cin, expr);
    expr.erase(remove(expr.begin(),expr.end(), ' '), expr.end());
    float result = parse(expr);
    cout << result << endl;
