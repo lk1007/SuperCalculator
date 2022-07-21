@@ -1,5 +1,5 @@
 #include <iostream>
-#include "func.h"
+#include "calculator.h"
 int main(){
     Calculator calc = Calculator();
     calc.operation();
