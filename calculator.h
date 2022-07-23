@@ -8,6 +8,7 @@ class Calculator{
         Calculator();
     private:
         std::vector<float> history;
+        float eval(std::string& expr, int opLoc);
         float parse(std::string& expr);
         float add(float a, float b);
         float sub(float a, float b);
