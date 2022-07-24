@@ -28,9 +28,14 @@ class Node{
         Node(float val);
         Node(int val);
         void printChildren(){
-            std::cout << "left: " << this->left << std::endl;
-            std::cout << "right: " << this->right << std::endl;
+            if(this->left || this->right){
+                std::cout << "node: " << (this) << std::endl; 
+                std::cout << "\tleft: " << this->left << std::endl;
+                std::cout << "\tright: " << this->right << std::endl;
+            }
         }
+        void printTree();
+        Node* removeChild(Node* child);
         Node* getHead();
         Node* addParent(Node* parent);
         Node* addChild(Node* child);

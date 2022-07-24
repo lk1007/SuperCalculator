@@ -5,48 +5,34 @@
 using namespace std;
 
 #define isNum(i) (i >= 0 && i < expr.size() && expr.at(i) >= '0' && expr.at(i) <= '9' )
-float Calculator::eval(string& expr, int opLoc){
-    int i = opLoc-1;
-    int j = opLoc+1;
-    char op = expr.at(opLoc);
-    cout << i << ' ' << j << endl;
-    while(isNum(i) || isNum(j)){
-        if(isNum(i-1))
-            i--;
-        if(isNum(j+1))
-            j++;
-        if(i == 0 && j == expr.size() - 1)
-            break;
-    }
-    cout << "going2" << endl;
-    float num1 = stof(expr.substr(i,opLoc));
-    float num2 = stof(expr.substr(opLoc+1,expr.size()-1));
-    return doOperation(num1,num2,op);
-    
-}
+
 Node* exprToTree(std::string expr){
     expr.erase(remove(expr.begin(),expr.end(), ' '), expr.end());
-    Node* start;
+    Node* start = nullptr;
     int numStart = 0;
     int numEnd = 0;
     Node* op = nullptr;
     for(int i = 0; i < expr.size(); i++){
         if(isNum(i) && i != -1 && !isNum(i-1))
             numStart = i;
-        if(!isNum(i) || i == expr.size() - 1){
+        if(i == expr.size()-1){
+            Node* num = op->addChild(stof(expr.substr(numStart,i)));
+            start->getHead()->printTree();
+        }
+        if(!isNum(i)){
             //if first number, make new node and make operator a parent
             if(numEnd == 0){
                 start = new Node(stof(expr.substr(numStart,i)));
                 op = new Node(expr.at(i));
-                op->printChildren();
                 start->addParent(op);
             }
             //if another number, make child of previous operator and parent the new operator
             else{
                 Node* num = op->addChild(stof(expr.substr(numStart,i)));
-                op->printChildren();
                 op = new Node(expr.at(i));
+            cout << i << endl;
                 num->addParent(op);
+            cout << i << endl;
             }
             numEnd = i; 
         }
@@ -83,9 +69,9 @@ float Calculator::parse(string& expr){
  */
 void Calculator::calcMain(){
    string expr;
-   //cout << "Input your expression to calculate: ";
-   //getline (cin, expr);
-   expr = "11 + 22 + 11";
+   cout << "Input your expression to calculate: ";
+   getline (cin, expr);
+   //expr = "11 * 11 + 11 * 22";
    expr.erase(remove(expr.begin(),expr.end(), ' '), expr.end());
    float result = parse(expr);
    cout <<  "answer: " << result << endl;
