@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(calculator)
 
-set(sources main.cpp calculator.cpp calculator.h)
+set(sources main.cpp calculator.cpp tree.cpp calculations.cpp calculator.h)
 add_executable(${PROJECT_NAME} ${sources})
 
 add_custom_target(run

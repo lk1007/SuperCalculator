@@ -2,6 +2,6 @@
 #include "calculator.h"
 int main(){
     Calculator calc = Calculator();
-    calc.operation();
+    calc.calcMain();
     return 0;
 }
