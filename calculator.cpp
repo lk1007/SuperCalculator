@@ -43,6 +43,14 @@ float Calculator::eval(string& expr, int opLoc){
     switch (op){
         case '+':
             return this->add(num1,num2);
+        case '-':
+            return this->sub(num1,num2);
+        case '*':
+            return this->mult(num1,num2);
+        case '/':
+            return this->div(num1,num2);
+        default:
+            return 0;
         }
 }
 /**

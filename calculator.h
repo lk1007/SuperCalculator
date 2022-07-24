@@ -15,4 +15,8 @@ class Calculator{
         float mult(float a, float b);
         float div(float a, float b);
     };
+struct Node{
+    bool isOp;
+    std::vector<Node> children;
+};
 #endif
