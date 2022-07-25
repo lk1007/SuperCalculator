@@ -76,6 +76,9 @@ void Calculator::calcMain(){
    float result = parse(expr);
    cout <<  "answer: " << result << endl;
 }
+float Calculator::calcTest(string expr){
+    return this->parse(expr);
+}
 void Calculator::showHistory(){
     std::cout << "history: \n";
     for(int i = 0; i < history.size(); i++){
