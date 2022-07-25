@@ -17,7 +17,7 @@ Node* exprToTree(std::string expr){
             numStart = i;
         if(i == expr.size()-1){
             Node* num = op->addChild(stof(expr.substr(numStart,i)));
-            start->getHead()->printTree();
+            //start->getHead()->printTree();
         }
         if(!isNum(i)){
             //if first number, make new node and make operator a parent
@@ -30,9 +30,7 @@ Node* exprToTree(std::string expr){
             else{
                 Node* num = op->addChild(stof(expr.substr(numStart,i)));
                 op = new Node(expr.at(i));
-            cout << i << endl;
                 num->addParent(op);
-            cout << i << endl;
             }
             numEnd = i; 
         }

@@ -1,10 +1,12 @@
+#ifndef CALCULATOR_H
+#define CALCULATOR_H
 #include <vector>
 #include <iostream>
-#ifndef CALCULATOR_H
 class Calculator{
     public:
         void showHistory();
         void calcMain();
+        float calcTest(std::string expr);
         float doOperation(int num1, int num2, char op);
         Calculator();
 

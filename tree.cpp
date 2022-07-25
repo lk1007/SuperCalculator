@@ -80,6 +80,7 @@ Node* Node::removeChild(Node* child){
     else if(this->right == child)
         this->right = nullptr;
     else throw std::runtime_error("Not a valid child");
+    return child;
 }
 Node* Node::addParent(Node* newParent){
     if(this->parent){
@@ -96,7 +97,7 @@ Node* Node::addParent(Node* newParent){
     }
     else
         newParent->addChild(this);
-    
+    return newParent; 
 }
 Node* sampleTree(){
     vector<int> values;
