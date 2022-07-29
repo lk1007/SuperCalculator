@@ -26,6 +26,7 @@ class Node{
         Node* parent;
         Node* left;
         Node* right;
+        int getWidth();
     public:
         Node(float val);
         Node(int val);

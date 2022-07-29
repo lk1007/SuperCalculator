@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <string>
 #include "calculator.h"
+#include <cstdio>
 using namespace std;
 Node::Node(float val){
     this->left = nullptr;
@@ -92,12 +93,54 @@ Node* Node::addParent(Node* newParent){
             this->parent->removeChild(this);
             this->parent->addChild(newParent);
             newParent->addChild(this); 
-
         }
     }
     else
         newParent->addChild(this);
     return newParent; 
+}
+
+inline void charPrint(float n, int offset){
+    for(int i = 0; i <= offset/2; i++)
+        printf(" ");
+    if( n== '*' || n == '+' || n == '-' || n == '/')
+        printf(" %c ",(char)n);
+    else
+        printf(" %d ",(int)n);
+}
+int Node::getWidth(){
+    if(!(this->left || this->right))
+        return 1;
+    int leftSum = 0;
+    int rightSum = 0;
+    if(this->left)
+         leftSum = this->left->getWidth(); 
+    if(this->right)
+        rightSum = this->right->getWidth();
+    return 2*max(leftSum,rightSum);
+}
+void Node::printTree(){
+    int width = this->getWidth();
+    float n = this->val;
+    if(this->parent){
+        if(this->parent->left == this)
+            charPrint(n,width);
+        else{
+            charPrint(n,width);
+            cout << endl;
+        }
+
+    }
+    else{
+        charPrint(n,width);
+        cout << endl;
+    }
+    if(this->left)
+        this->left->printTree();
+    if(this->right)
+        this->right->printTree();
+    if(!this->parent)
+        cout << endl << endl;
 }
 Node* sampleTree(){
     vector<int> values;
@@ -109,23 +152,4 @@ Node* sampleTree(){
     Node* ch21 = ch2->addChild(4);
     Node* ch22 = ch2->addChild(5);
     return head;
-}
-void Node::printTree(){
-    int n = this->val;
-    if(this->val == '*' || this->val == '+' || this->val == '-' || this->val == '/')
-        n = (char)n;
-    if(this->parent){
-        if(this->parent->left == this)
-            cout << ' ' << n << ' ';
-        else
-            cout << ' ' << n << ' ' << endl;
-    }
-    else
-        cout << n << endl;
-    if(this->left)
-        this->left->printTree();
-    if(this->right)
-        this->right->printTree();
-    if(!this->parent)
-        cout << endl << endl;
 }
