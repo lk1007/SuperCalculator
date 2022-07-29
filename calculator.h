@@ -26,7 +26,7 @@ class Node{
         Node* parent;
         Node* left;
         Node* right;
-        int getWidth();
+        void printTreeAux(const std::string& prefix, bool isLeft);
     public:
         Node(float val);
         Node(int val);

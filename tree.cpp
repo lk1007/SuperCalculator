@@ -100,48 +100,34 @@ Node* Node::addParent(Node* newParent){
     return newParent; 
 }
 
-inline void charPrint(float n, int offset){
-    for(int i = 0; i <= offset/2; i++)
-        printf(" ");
+inline void charPrint(float n){
     if( n== '*' || n == '+' || n == '-' || n == '/')
-        printf(" %c ",(char)n);
+        printf(" %c \n",(char)n);
     else
-        printf(" %d ",(int)n);
+        printf(" %d \n",(int)n);
 }
-int Node::getWidth(){
-    if(!(this->left || this->right))
-        return 1;
-    int leftSum = 0;
-    int rightSum = 0;
-    if(this->left)
-         leftSum = this->left->getWidth(); 
-    if(this->right)
-        rightSum = this->right->getWidth();
-    return 2*max(leftSum,rightSum);
-}
-void Node::printTree(){
-    int width = this->getWidth();
-    float n = this->val;
-    if(this->parent){
-        if(this->parent->left == this)
-            charPrint(n,width);
-        else{
-            charPrint(n,width);
-            cout << endl;
-        }
 
-    }
-    else{
-        charPrint(n,width);
-        cout << endl;
-    }
-    if(this->left)
-        this->left->printTree();
-    if(this->right)
-        this->right->printTree();
-    if(!this->parent)
-        cout << endl << endl;
+void Node::printTreeAux(const string& prefix, bool isLeft){
+        cout << prefix;
+        if(this->parent)
+            cout << (isLeft ? "├──" : "└──" );
+        else
+            cout << "   ";
+        // print the value of the node
+        charPrint(this->val);
+
+        // enter the next tree level - left and right branch
+        if(this->left)
+            this->left->printTreeAux( prefix + (isLeft ? "│   " : "    "), true);
+        if(this->right)
+            this->right->printTreeAux( prefix + (isLeft ? "│   " : "    "), false);
 }
+
+void Node::printTree()
+{
+    this->printTreeAux("" ,false);    
+}
+
 Node* sampleTree(){
     vector<int> values;
     Node* head = new Node('*');
