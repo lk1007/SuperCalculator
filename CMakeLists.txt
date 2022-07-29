@@ -13,4 +13,5 @@ set(Sources
 
 )
 add_library(${projName} STATIC ${Sources} ${Headers})
+add_executable(calc ${Sources} ${Headers} main.cpp)
 add_subdirectory(test)
