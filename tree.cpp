@@ -85,19 +85,23 @@ Node* Node::removeChild(Node* child){
 }
 Node* Node::addParent(Node* newParent){
     if(this->parent){
-        //if same priority, make new parent the overall parent
-        if(this->parent->priority >= newParent->priority) 
-            newParent->addChild(this->parent);
-        //if bigger priority make old parent parent of new tree
-        else{
+        if(newParent->priority  > this->parent->priority){
             this->parent->removeChild(this);
             this->parent->addChild(newParent);
             newParent->addChild(this); 
         }
+        //if same priority, make new parent the overall parent
+        else
+            this->parent->addParent(newParent);
     }
-    else
-        newParent->addChild(this);
+    //if no parent
+    else{
+        if(this->priority > newParent->priority)
+            this->addChild(newParent);
+        else
+            newParent->addChild(this);
     return newParent; 
+    }
 }
 
 inline void charPrint(float n){
