@@ -6,8 +6,7 @@
 using namespace std;
 
 #define isNum(i) (i >= 0 && i < expr.size() && expr.at(i) >= '0' && expr.at(i) <= '9' )
-
-Node* exprToTree(std::string expr){
+Node* expressionToTree(std::string expr){
     expr.erase(remove(expr.begin(),expr.end(), ' '), expr.end());
     Node* start = nullptr;
     int numStart = 0;
@@ -58,25 +57,11 @@ float Calculator::doOperation(int num1, int num2, char op){
  * @param expr 
  * @return float 
  */
-float Calculator::parse(string& expr){
-    Node* head = exprToTree(expr);
-    return head->evalTree(*this);
-}
-/**
- * @brief Start of calculator program. Takes in expression and returns result of expression 
- * 
- */
-void Calculator::calcMain(){
-   string expr;
-   cout << "Input your expression to calculate: ";
-   getline (cin, expr);
-   //expr = "11 * 11 + 11 * 22";
-   expr.erase(remove(expr.begin(),expr.end(), ' '), expr.end());
-   float result = parse(expr);
-   cout <<  "answer: " << result << endl;
-}
 float Calculator::calcTest(string expr){
-    return this->parse(expr);
+    if(expr.empty())
+        return 0;
+    Node* head = expressionToTree(expr);
+    return head->evalTree(*this);
 }
 void Calculator::showHistory(){
     std::cout << "history: \n";
@@ -84,5 +69,21 @@ void Calculator::showHistory(){
         std::cout << "\t" << history.at(i) << "\n";
     }
 }
+/**
+ * @brief Start of calculator program. Takes in expression and returns result of expression 
+ * 
+ */
+void Calculator::calcMain(){
+    string expr;
+    float result;
+    cout << "Input your expression to calculate: ";
+    getline (cin, expr);
+    //expr = "11 * 11 + 11 * 22";
+    expr.erase(remove(expr.begin(),expr.end(), ' '), expr.end());
+    Node* head = expressionToTree(expr);
+    result =  head->evalTree(*this);
+    cout <<  "answer: " << result << endl;
+}
+
 Calculator::Calculator(){
 }
