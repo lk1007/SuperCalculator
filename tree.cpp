@@ -11,7 +11,7 @@ Node::Node(float val){
     this->val = val;
     if(val == '*' || val == '/') this->priority = 2;
     else if(val == '+' || val == '-') this->priority = 1;
-    else this->priority == 0;
+    else this->priority = 0;
 }
 Node::Node(int val){
     this->left = nullptr;
@@ -96,12 +96,12 @@ Node* Node::addParent(Node* newParent){
     }
     //if no parent
     else{
-        if(this->priority > newParent->priority)
-            this->addChild(newParent);
-        else
+        if(this->priority >= newParent->priority || this->priority == 0)
             newParent->addChild(this);
-    return newParent; 
+        else
+            this->addChild(newParent);
     }
+    return newParent; 
 }
 
 inline void charPrint(float n){
