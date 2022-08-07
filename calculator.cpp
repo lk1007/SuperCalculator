@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <string>
 #include "calculator.h"
-#define DEBUG 1
+#define DEBUG 0
 using namespace std;
 
 #define isNum(i) (i >= 0 && i < expr.size() && expr.at(i) >= '0' && expr.at(i) <= '9' )
